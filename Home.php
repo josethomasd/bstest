@@ -6,7 +6,7 @@
 <nav class="navbar navbar-inverse">
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-        <li><a href="Home.php">Home</a></li>
+        <li class="active"><a href="Home.php">Home</a></li>
         <li><a href="Signin.php">Login</a></li>
         <li><a href="Register.php">Register</a></li>
       </ul>

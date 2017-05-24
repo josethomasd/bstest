@@ -8,6 +8,9 @@ if(isset($_SESSION['userSession'])!=""){
 	if (isset($_POST['btn-signup'])){
 		$Uname = strip_tags($_POST['uname']);
 		$Email = strip_tags($_POST['email']);
+		if (!filter_var($Email, FILTER_VALIDATE_EMAIL) === true) {
+			$msg="invalid email";
+		}
 		$Pass = strip_tags($_POST['pass']);
 		$Mobile = strip_tags($_POST['mobile']);
 		
@@ -21,7 +24,9 @@ if(isset($_SESSION['userSession'])!=""){
 		$check_email = $DBcon->query("select * from users where email='$Email'");
 		
 		$count = $check_email->num_rows;
-		
+		if (!preg_match("/^[a-zA-Z ]*$/",$Uname)) {
+			$msg = "Only letters and white space allowed"; 
+		}
 		if($count==0)
 		{
 			$query="INSERT INTO users (email,name,password,mobile) values('$Email','$Uname','$hashed_pwd','$Mobile')";
@@ -67,7 +72,7 @@ if(isset($_SESSION['userSession'])!=""){
 		<label>Name: </label> <input type="text" name="uname" class="form-control" required>
 	</div>
 	<div class="form-group">
-		<label>Email:  </label> <input type="email" name="email" class="form-control" required> <br>
+		<label>Email:  </label> <input type="text" name="email" class="form-control" > <br>
 	</div>
 	<div class="form-group">
 		<label>Password:  </label> <input type="password" name="pass" class="form-control" required><br>
